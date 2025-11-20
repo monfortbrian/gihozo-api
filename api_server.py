@@ -21,12 +21,13 @@ app.add_middleware(
 
 
 # CONFIG
-HF_API_URL_old = "https://api-inference.huggingface.co/models/monfortbrian/biomistral-7b-4bit-gihozo"
-HF_API_URL = "https://router.huggingface.co/hf-inference/models/monfortbrian/biomistral-7b-4bit-gihozo"
+HF_API_URL_old_2 = "https://api-inference.huggingface.co/models/monfortbrian/biomistral-7b-4bit-gihozo"
+HF_API_URL_old_1 = "https://router.huggingface.co/hf-inference/models/monfortbrian/biomistral-7b-4bit-gihozo"
+HF_API_URL = "https://api-inference.huggingface.co/models/BioMistral/BioMistral-7B"
 HF_TOKEN = os.getenv("HF_TOKEN")
 
 print("Gihozo API starting...")
-print(f"Using monfortbrian/biomistral-7b-4bit-gihozo")
+print(f"Using model: BioMistral/BioMistral-7B (official)")
 print(f"HF Token is Configured")
 
 
@@ -112,7 +113,8 @@ class HealthResponse(BaseModel):
 def root():
     return {
         "status": "Gihozo API Running",
-        "model": "monfortbrian/biomistral-7b-4bit-gihozo",
+        # "model": "monfortbrian/biomistral-7b-4bit-gihozo",
+        "model": "BioMistral/BioMistral-7B",
         "commands": list(COMMANDS.keys())
     }
 
@@ -122,7 +124,8 @@ def health():
     return {
         "status": "healthy",
         "api": "huggingface-inference",
-        "model": "monfortbrian/biomistral-7b-4bit-gihozo"
+        # "model": "monfortbrian/biomistral-7b-4bit-gihozo"
+        "model": "BioMistral/BioMistral-7B"
     }
 
 
