@@ -14,7 +14,7 @@ app.add_middleware(
 )
 
 MODEL_ID = "meta-llama/Llama-2-7b-chat-hf"
-HF_API_URL = f"https://api-inference.huggingface.co/models/{MODEL_ID}"
+HF_API_URL = f"https://router.huggingface.co/models/{MODEL_ID}"
 HF_TOKEN = os.getenv("HF_TOKEN")
 
 COMMANDS = {
@@ -58,20 +58,19 @@ async def process(req: ClinicalRequest):
         timeout=120
     )
 
-    # Handle HF errors correctly
     if response.status_code == 503:
-        raise HTTPException(503, "Model loading… retry in 20 sec")
+        raise HTTPException(503, "Model loading... retry in 10-20 seconds")
 
     if response.status_code != 200:
-        raise HTTPException(500, f"HuggingFace Error: {response.text}")
+        raise HTTPException(500, f"HuggingFace Router Error: {response.text}")
 
-    result = response.json()
+    data = response.json()
 
-    # HF returns list → extract generated_text
-    if isinstance(result, list) and "generated_text" in result[0]:
-        output = result[0]["generated_text"]
+    # router returns array
+    if isinstance(data, list) and "generated_text" in data[0]:
+        output = data[0]["generated_text"]
     else:
-        output = str(result)
+        output = str(data)
 
     return {"command": req.command, "response": output}
 
