@@ -14,7 +14,7 @@ app.add_middleware(
 )
 
 MODEL_ID = "epfl-llm/meditron-7b"
-HF_API_URL = f"https://router.huggingface.co/models/{MODEL_ID}"
+HF_API_URL = f"https://api-inference.huggingface.co/models/{MODEL_ID}"
 HF_TOKEN = os.getenv("HF_TOKEN")
 
 COMMANDS = {
