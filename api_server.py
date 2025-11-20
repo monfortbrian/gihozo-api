@@ -15,7 +15,7 @@ app.add_middleware(
 )
 
 # Used Llama-2-7B
-HF_API_URL = "https://api-inference.huggingface.co/models/meta-llama/Llama-2-7b-chat-hf"
+HF_API_URL = "https://router.huggingface.co/models/meta-llama/Llama-2-7b-chat-hf"
 HF_TOKEN = os.getenv("HF_TOKEN", "hf_hzKFLydMvlXjheoZBPklwnuDHeKKCxWn")
 
 COMMANDS = {
