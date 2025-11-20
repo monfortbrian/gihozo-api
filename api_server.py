@@ -19,7 +19,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 # CONFIG
 HF_API_URL_old_2 = "https://api-inference.huggingface.co/models/monfortbrian/biomistral-7b-4bit-gihozo"
 HF_API_URL_old_1 = "https://router.huggingface.co/hf-inference/models/monfortbrian/biomistral-7b-4bit-gihozo"
@@ -113,8 +112,7 @@ class HealthResponse(BaseModel):
 @app.get("/", response_model=HealthResponse)
 def root():
     return {
-        "status": "Gihozo API Running",
-        # "model": "monfortbrian/biomistral-7b-4bit-gihozo",
+        "status": "🩺 Gihozo API Running",
         "model": "BioMistral/BioMistral-7B",
         "commands": list(COMMANDS.keys())
     }
@@ -125,7 +123,6 @@ def health():
     return {
         "status": "healthy",
         "api": "huggingface-inference",
-        # "model": "monfortbrian/biomistral-7b-4bit-gihozo"
         "model": "BioMistral/BioMistral-7B"
     }
 
@@ -152,13 +149,13 @@ async def process(request: ClinicalRequest):
     # Build prompt
     prompt = COMMANDS[request.command].format(text=request.patient_text)
 
-    # Prepare headers with YOUR token
+    # Prepare headers
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {HF_TOKEN}"
     }
 
-    # Call Hugging Face API with retry logic
+    # Call HF API with retry logic
     max_retries = 3
     for attempt in range(max_retries):
         try:
@@ -184,7 +181,7 @@ async def process(request: ClinicalRequest):
                 if "loading" in str(error_data).lower():
                     wait_time = error_data.get("estimated_time", 20)
                     if attempt < max_retries - 1:
-                        print(f"Model loading, waiting {wait_time}s...")
+                        print(f"⏳ Model loading, waiting {wait_time}s...")
                         time.sleep(wait_time)
                         continue
                     else:
@@ -203,7 +200,7 @@ async def process(request: ClinicalRequest):
                 else:
                     generated = str(result)
 
-                # Clean up response (remove prompt if included)
+                # Clean up response
                 cleaned = generated.strip()
                 if prompt in cleaned:
                     cleaned = cleaned.split(prompt)[-1].strip()
@@ -222,7 +219,7 @@ async def process(request: ClinicalRequest):
             elif response.status_code == 404:
                 raise HTTPException(
                     status_code=404,
-                    detail="Model not found. Make sure monfortbrian/biomistral-7b-4bit-gihozo is public on HuggingFace"
+                    detail="Model not found on HuggingFace"
                 )
             else:
                 raise HTTPException(
