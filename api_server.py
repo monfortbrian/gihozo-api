@@ -22,7 +22,7 @@ app.add_middleware(
 
 # CONFIG - Using Meditron (works with HF Inference)
 # Medical model with working API
-HF_API_URL = "https://api-inference.huggingface.co/models/epfl-llm/meditron-7b"
+HF_API_URL = "https://router.huggingface.co/hf-inference/models/epfl-llm/meditron-7b"
 HF_TOKEN = os.getenv("HF_TOKEN", "hf_hzKFLydMvlXjheoZBPklwnuDHeKKCxWn")
 
 print("🩺 Gihozo API starting...")
