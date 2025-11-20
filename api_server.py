@@ -13,7 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MODEL_ID = "meta-llama/Llama-2-7b-chat-hf"
+MODEL_ID = "epfl-llm/meditron-7b"
 HF_API_URL = f"https://router.huggingface.co/models/{MODEL_ID}"
 HF_TOKEN = os.getenv("HF_TOKEN")
 
