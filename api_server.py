@@ -20,8 +20,9 @@ app.add_middleware(
 )
 
 
-# CONFIG - Using YOUR quantized model on HF
-HF_API_URL = "https://api-inference.huggingface.co/models/monfortbrian/biomistral-7b-4bit-gihozo"
+# CONFIG
+HF_API_URL_old = "https://api-inference.huggingface.co/models/monfortbrian/biomistral-7b-4bit-gihozo"
+HF_API_URL = "https://router.huggingface.co/hf-inference/models/monfortbrian/biomistral-7b-4bit-gihozo"
 HF_TOKEN = os.getenv("HF_TOKEN")
 
 print("Gihozo API starting...")
@@ -110,7 +111,7 @@ class HealthResponse(BaseModel):
 @app.get("/", response_model=HealthResponse)
 def root():
     return {
-        "status": "🩺 Gihozo API Running",
+        "status": "Gihozo API Running",
         "model": "monfortbrian/biomistral-7b-4bit-gihozo",
         "commands": list(COMMANDS.keys())
     }
