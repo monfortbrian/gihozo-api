@@ -13,8 +13,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MODEL_ID = "epfl-llm/meditron-7b"
-HF_API_URL = f"https://api-inference.huggingface.co/models/{MODEL_ID}"
+MODEL_ID = "meta-llama/Meta-Llama-3-8B-Instruct"
+HF_API_URL = f"https://router.huggingface.co/models/{MODEL_ID}"
 HF_TOKEN = os.getenv("HF_TOKEN")
 
 COMMANDS = {
