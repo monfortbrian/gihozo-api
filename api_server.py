@@ -13,8 +13,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MODEL_ID = "meta-llama/Meta-Llama-3-8B-Instruct"
-HF_API_URL = f"https://router.huggingface.co/models/{MODEL_ID}"
+# MODEL_ID = "meta-llama/Meta-Llama-3-8B-Instruct"
+HF_API_URL = "https://g68wtd4mixqxv1tn.us-east-1.aws.endpoints.huggingface.cloud"
 HF_TOKEN = os.getenv("HF_TOKEN")
 
 COMMANDS = {
