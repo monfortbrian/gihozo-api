@@ -23,8 +23,8 @@ app.add_middleware(
 HF_ENDPOINT = "https://g68wtd4mixqxv1tn.us-east-1.aws.endpoints.huggingface.cloud"
 HF_TOKEN = os.getenv("HF_TOKEN", "")
 
-print("🩺 Gihozo Advanced Clinical Reasoning API")
-print(f"📡 Endpoint: {HF_ENDPOINT}")
+print("Gihozo Advanced Clinical Reasoning API")
+print(f"Endpoint: {HF_ENDPOINT}")
 print(f"Token: {'Configured' if HF_TOKEN else 'MISSING'}")
 
 
